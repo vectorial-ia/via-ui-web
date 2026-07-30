@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "via-ui/styles.css";
+
+@theme {
+  --font-sans: "Google Sans", sans-serif;
+  --color-primary-50: var(--via-primary-light);
+  --color-primary-100: var(--via-primary-border);
+  --color-primary-500: var(--via-primary);
+  --color-primary-600: var(--via-primary-dark);
+}
+
+body {
+  font-family: "Google Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "GRAD" 0;
+}
