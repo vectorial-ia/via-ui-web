@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Sliders } from "lucide-react";
-import { Tabs, Code } from "via-ui";
+import { Tabs, Code } from "@vectorial-ia/via-ui";
 
 interface SandboxLayoutProps {
   controls: React.ReactNode;
@@ -23,7 +23,7 @@ export function SandboxLayout({ controls, preview, codeString, minHeight = "auto
         <Sliders size={16} className="text-primary-500" />
         Interactúa y Prueba (Sandbox)
       </h2>
-      
+
       <div className="grid gap-6 md:grid-cols-3 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
         {/* Left Controls */}
         <div className="p-5 bg-gray-50/50 dark:bg-gray-900/30 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-800 space-y-4">

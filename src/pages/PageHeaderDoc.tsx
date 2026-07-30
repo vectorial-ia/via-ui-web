@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PageHeader, Button, Input } from "via-ui";
+import { PageHeader, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -53,19 +53,19 @@ export function PageHeaderDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Title (Título)"
-          type="text" 
-          value={title} 
+          type="text"
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Subtitle (Subtítulo)"
-          type="text" 
-          value={subtitle} 
+          type="text"
+          value={subtitle}
           onChange={(e) => setSubtitle(e.target.value)}
         />
       </div>
@@ -109,7 +109,7 @@ export function PageHeaderDoc() {
     </div>
   );
 
-  const codeString = `import { PageHeader } from "via-ui";
+  const codeString = `import { PageHeader } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -128,13 +128,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="PageHeader (Encabezado de Página)"
         description="Contenedor superior estructurado para títulos de sección y subtítulos que integra un buscador dinámico en el lado derecho."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

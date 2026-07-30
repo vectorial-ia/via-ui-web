@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button, Input } from "via-ui";
+import { Avatar, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -57,18 +57,18 @@ export function AvatarDoc() {
   const controls = (
     <>
       <div>
-        <Input 
-          label="Nombre" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
+        <Input
+          label="Nombre"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
-          label="Imagen (URL)" 
-          value={src} 
-          onChange={(e) => setSrc(e.target.value)} 
+        <Input
+          label="Imagen (URL)"
+          value={src}
+          onChange={(e) => setSrc(e.target.value)}
         />
       </div>
 
@@ -143,7 +143,7 @@ export function AvatarDoc() {
     </div>
   );
 
-  const codeString = `import { Avatar } from "via-ui";
+  const codeString = `import { Avatar } from "@vectorial-ia/via-ui";
 
 function Example() {
   return (
@@ -159,13 +159,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Avatar (Perfil de Usuario)"
         description="Representación gráfica o textual de iniciales para perfiles de usuario, con soportes de estado e imágenes de respaldo."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

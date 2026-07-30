@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FloatingInput, Button, Input, Switch } from "via-ui";
+import { FloatingInput, Button, Input, Switch } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -39,17 +39,17 @@ export function FloatingInputDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Etiqueta (Label)"
-          value={label} 
+          value={label}
           onChange={(e) => setLabel(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Mensaje de Error"
-          value={error} 
+          value={error}
           onChange={(e) => setError(e.target.value)}
           placeholder="Ej. El campo es obligatorio"
         />
@@ -96,7 +96,7 @@ export function FloatingInputDoc() {
     </div>
   );
 
-  const codeString = `import { FloatingInput } from "via-ui";
+  const codeString = `import { FloatingInput } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -113,13 +113,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Floating Labels (Entradas Flotantes)"
         description="Campos de entrada de texto donde la etiqueta se desplaza de manera fluida y reduce su escala al activarse o contener texto."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

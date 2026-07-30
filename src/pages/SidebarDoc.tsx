@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Sidebar, Button } from "via-ui";
-import { 
-  LayoutDashboard, 
-  Truck, 
-  Clock, 
-  MapPin, 
-  Droplet, 
-  ClipboardList, 
-  Bell, 
-  Wrench, 
-  Search, 
-  Cpu, 
-  Settings 
+import { Sidebar, Button } from "@vectorial-ia/via-ui";
+import {
+  LayoutDashboard,
+  Truck,
+  Clock,
+  MapPin,
+  Droplet,
+  ClipboardList,
+  Bell,
+  Wrench,
+  Search,
+  Cpu,
+  Settings
 } from "lucide-react";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -103,7 +103,7 @@ export function SidebarDoc() {
     </div>
   );
 
-  const codeString = `import { Sidebar } from "via-ui";
+  const codeString = `import { Sidebar } from "@vectorial-ia/via-ui";
 import { Terminal, Settings, User } from "lucide-react";
 import { useState } from "react";
 
@@ -127,13 +127,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Sidebar (Navegación Lateral)"
         description="Menú vertical estructurado para navegación interna, con íconos personalizados, animaciones de hover y marcación del elemento activo."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dropdown, Button } from "via-ui";
+import { Dropdown, Button } from "@vectorial-ia/via-ui";
 import { Settings, User, LogOut, ChevronDown } from "lucide-react";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -105,7 +105,7 @@ export function DropdownDoc() {
     </div>
   );
 
-  const codeString = `import { Dropdown, Button } from "via-ui";
+  const codeString = `import { Dropdown, Button } from "@vectorial-ia/via-ui";
 
 const items = [
   { id: "edit", label: "Editar Perfil" },
@@ -128,13 +128,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Dropdown (Menú Desplegable)"
         description="Menús de contexto emergentes interactivos para ofrecer múltiples acciones rápidas bajo demanda de un activador."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

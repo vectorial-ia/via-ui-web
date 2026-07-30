@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button, Switch } from "via-ui";
+import { Input, Button, Switch } from "@vectorial-ia/via-ui";
 import { User, Key } from "lucide-react";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -47,28 +47,28 @@ export function InputDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Label (Etiqueta)"
-          type="text" 
-          value={inpLabel} 
+          type="text"
+          value={inpLabel}
           onChange={(e) => setInpLabel(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Placeholder"
-          type="text" 
-          value={inpPlaceholder} 
+          type="text"
+          value={inpPlaceholder}
           onChange={(e) => setInpPlaceholder(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Error (Mensaje)"
-          type="text" 
-          value={inpError} 
+          type="text"
+          value={inpError}
           onChange={(e) => setInpError(e.target.value)}
           placeholder="Ej. El usuario es obligatorio"
         />
@@ -124,7 +124,7 @@ export function InputDoc() {
     </div>
   );
 
-  const codeString = `import { Input } from "via-ui";
+  const codeString = `import { Input } from "@vectorial-ia/via-ui";
 import { User } from "lucide-react";
 import { useState } from "react";
 
@@ -141,13 +141,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Input (Campo de Texto)"
         description="Campo de entrada de texto optimizado para la recolección de contraseñas, correos, nombres de usuario y más, con soporte para estados interactivos."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}
@@ -167,11 +167,11 @@ function Example() {
           {/* Password Input */}
           <div className="border border-gray-200 dark:border-gray-800 rounded-xl p-6 bg-white dark:bg-gray-950 flex flex-col gap-4">
             <h3 className="text-xs font-bold text-gray-500 uppercase">Input de Contraseña</h3>
-            <Input 
-              label="Contraseña" 
-              type="password" 
-              placeholder="••••••••" 
-              icon={<Key size={13} className="text-gray-400" />} 
+            <Input
+              label="Contraseña"
+              type="password"
+              placeholder="••••••••"
+              icon={<Key size={13} className="text-gray-400" />}
             />
           </div>
         </div>

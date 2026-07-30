@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Button } from "via-ui";
+import { Tabs, Button } from "@vectorial-ia/via-ui";
 import { Globe, User, Settings } from "lucide-react";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -122,7 +122,7 @@ export function TabsDoc() {
     </div>
   );
 
-  const codeString = `import { Tabs } from "via-ui";
+  const codeString = `import { Tabs } from "@vectorial-ia/via-ui";
 import { Globe, User, Settings } from "lucide-react";
 import { useState } from "react";
 
@@ -149,13 +149,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Tabs (Pestañas)"
         description="Agrupador de navegación por pestañas en un panel para organizar contenidos alternando vistas contextuales."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

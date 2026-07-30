@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion, Button, Switch } from "via-ui";
+import { Accordion, Button, Switch } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -86,7 +86,7 @@ export function AccordionDoc() {
     </div>
   );
 
-  const codeString = `import { Accordion } from "via-ui";
+  const codeString = `import { Accordion } from "@vectorial-ia/via-ui";
 
 const items = [
   {
@@ -119,13 +119,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Accordion (Acordeón)"
         description="Contenedores colapsables apilados verticalmente para gestionar la visualización progresiva de secciones de información densa."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

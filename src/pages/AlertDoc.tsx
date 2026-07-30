@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Button, Input } from "via-ui";
+import { Alert, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -59,17 +59,17 @@ export function AlertDoc() {
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Título"
-          value={title} 
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Cuerpo"
-          value={body} 
+          value={body}
           onChange={(e) => setBody(e.target.value)}
         />
       </div>
@@ -90,10 +90,10 @@ export function AlertDoc() {
           ))}
         </div>
       </div>
-      
+
       {isDismissed && (
-        <Button 
-          variant="primary" 
+        <Button
+          variant="primary"
           size="sm"
           onClick={() => setIsDismissed(false)}
           style={{ width: "100%", marginTop: "10px" }}
@@ -123,7 +123,7 @@ export function AlertDoc() {
     </div>
   );
 
-  const codeString = `import { Alert } from "via-ui";
+  const codeString = `import { Alert } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -145,13 +145,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Alert (Alerta)"
         description="Banners contextuales premium para destacar notificaciones del sistema, errores críticos o confirmaciones exitosas."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

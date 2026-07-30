@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Input } from "via-ui";
+import { Card, Button, Input } from "@vectorial-ia/via-ui";
 import { Clock, Droplet, Bell } from "lucide-react";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -56,17 +56,17 @@ export function CardDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Título"
-          value={cardTitle} 
+          value={cardTitle}
           onChange={(e) => setCardTitle(e.target.value)}
         />
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Subtítulo / Valor"
-          value={cardSubtitle} 
+          value={cardSubtitle}
           onChange={(e) => setCardSubtitle(e.target.value)}
         />
       </div>
@@ -119,7 +119,7 @@ export function CardDoc() {
     </div>
   );
 
-  const codeString = `import { Card } from "via-ui";
+  const codeString = `import { Card } from "@vectorial-ia/via-ui";
 import { Clock } from "lucide-react";
 
 function Example() {
@@ -136,13 +136,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Card (Tarjeta)"
         description="Contenedores estructurados con soporte de iconos y estados métricos para tableros de control y analíticas."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}
@@ -163,33 +163,33 @@ function Example() {
       <div className="space-y-4">
         <h2 className="text-lg font-bold">Notificaciones y Alertas</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card 
-            title="TOTAL ALERTAS" 
-            subtitle="1" 
+          <Card
+            title="TOTAL ALERTAS"
+            subtitle="1"
             icon={<Bell size={15} />}
             iconColor="#4b5563"
             iconBgColor="#f3f4f6"
             layout="horizontal"
           />
-          <Card 
-            title="CRÍTICAS" 
-            subtitle="1" 
+          <Card
+            title="CRÍTICAS"
+            subtitle="1"
             icon={<Bell size={15} />}
             iconColor="#ef4444"
             iconBgColor="rgba(239, 68, 68, 0.05)"
             layout="horizontal"
           />
-          <Card 
-            title="ADVERTENCIAS" 
-            subtitle="0" 
+          <Card
+            title="ADVERTENCIAS"
+            subtitle="0"
             icon={<Bell size={15} />}
             iconColor="#f59e0b"
             iconBgColor="rgba(245, 158, 11, 0.05)"
             layout="horizontal"
           />
-          <Card 
-            title="POR RECONOCER" 
-            subtitle="0" 
+          <Card
+            title="POR RECONOCER"
+            subtitle="0"
             icon={<Clock size={15} />}
             iconColor="#3b82f6"
             iconBgColor="rgba(59, 130, 246, 0.05)"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Input } from "via-ui";
+import { Modal, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -36,9 +36,9 @@ export function ModalDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Título (Header)"
-          value={title} 
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
@@ -61,9 +61,9 @@ export function ModalDoc() {
       </div>
 
       <div className="pt-2">
-        <Button 
-          variant="primary" 
-          size="md" 
+        <Button
+          variant="primary"
+          size="md"
           onClick={() => setIsOpen(true)}
           style={{ width: "100%" }}
         >
@@ -75,9 +75,9 @@ export function ModalDoc() {
 
   const preview = (
     <div className="p-4 flex items-center justify-center">
-      <Button 
-        variant="primary" 
-        size="md" 
+      <Button
+        variant="primary"
+        size="md"
         onClick={() => setIsOpen(true)}
       >
         Lanzar Modal Demo
@@ -106,7 +106,7 @@ export function ModalDoc() {
     </div>
   );
 
-  const codeString = `import { Modal, Button } from "via-ui";
+  const codeString = `import { Modal, Button } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -135,13 +135,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Modal (Ventana Emergente)"
         description="Ventanas de diálogo contextuales superpuestas sobre el resto del contenido con transiciones de escala y difuminación del fondo."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

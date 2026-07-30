@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Spinner, Button } from "via-ui";
+import { Spinner, Button } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -67,7 +67,7 @@ export function SpinnerDoc() {
     </div>
   );
 
-  const codeString = `import { Spinner } from "via-ui";
+  const codeString = `import { Spinner } from "@vectorial-ia/via-ui";
 
 function Example() {
   return (
@@ -80,13 +80,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Spinner (Indicador de Carga)"
         description="Componente visual animado con rotación constante utilizado para notificar que un proceso se encuentra en ejecución."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Check, Copy } from "lucide-react";
-import { Button } from "via-ui";
+import { Button } from "@vectorial-ia/via-ui";
 
 interface CopyButtonProps {
   text: string;
@@ -8,7 +8,7 @@ interface CopyButtonProps {
 
 export function CopyButton({ text }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
-  
+
   const handleCopy = () => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -16,8 +16,8 @@ export function CopyButton({ text }: CopyButtonProps) {
   };
 
   return (
-    <Button 
-      onClick={handleCopy} 
+    <Button
+      onClick={handleCopy}
       variant="secondary"
       size="sm"
       style={{

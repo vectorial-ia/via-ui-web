@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Offcanvas, Button, Input } from "via-ui";
+import { Offcanvas, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -43,9 +43,9 @@ export function OffcanvasDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Título (Header)"
-          value={title} 
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
@@ -85,9 +85,9 @@ export function OffcanvasDoc() {
       </div>
 
       <div className="pt-2">
-        <Button 
-          variant="primary" 
-          size="md" 
+        <Button
+          variant="primary"
+          size="md"
           onClick={() => setIsOpen(true)}
           style={{ width: "100%" }}
         >
@@ -99,9 +99,9 @@ export function OffcanvasDoc() {
 
   const preview = (
     <div className="p-4 flex items-center justify-center">
-      <Button 
-        variant="primary" 
-        size="md" 
+      <Button
+        variant="primary"
+        size="md"
         onClick={() => setIsOpen(true)}
       >
         Lanzar Offcanvas Demo
@@ -129,7 +129,7 @@ export function OffcanvasDoc() {
     </div>
   );
 
-  const codeString = `import { Offcanvas, Button } from "via-ui";
+  const codeString = `import { Offcanvas, Button } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -155,13 +155,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Offcanvas (Panel Deslizable)"
         description="Contenedores laterales superpuestos que se deslizan desde los bordes de la ventana de visualización del usuario."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

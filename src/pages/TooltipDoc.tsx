@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tooltip, Button, Input } from "via-ui";
+import { Tooltip, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -30,10 +30,10 @@ export function TooltipDoc() {
   const controls = (
     <>
       <div>
-        <Input 
-          label="Contenido del Tooltip" 
-          value={content} 
-          onChange={(e) => setContent(e.target.value)} 
+        <Input
+          label="Contenido del Tooltip"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       </div>
 
@@ -64,7 +64,7 @@ export function TooltipDoc() {
     </div>
   );
 
-  const codeString = `import { Tooltip, Button } from "via-ui";
+  const codeString = `import { Tooltip, Button } from "@vectorial-ia/via-ui";
 
 function Example() {
   return (
@@ -76,13 +76,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Tooltip (Sugerencias)"
         description="Pequeño mensaje de texto flotante que aparece al pasar el cursor sobre un elemento para dar información contextual adicional."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

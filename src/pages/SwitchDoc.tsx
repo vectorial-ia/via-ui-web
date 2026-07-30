@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Button, Input } from "via-ui";
+import { Switch, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -50,9 +50,9 @@ export function SwitchDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Etiqueta (Label)"
-          value={label} 
+          value={label}
           onChange={(e) => setLabel(e.target.value)}
         />
       </div>
@@ -115,7 +115,7 @@ export function SwitchDoc() {
     </div>
   );
 
-  const codeString = `import { Switch } from "via-ui";
+  const codeString = `import { Switch } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -134,13 +134,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Switch (Interruptor)"
         description="Botón deslizante interactivo utilizado para alternar estados booleanos rápidos."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

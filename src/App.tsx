@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { 
-  BookOpen, 
-  Layers, 
-  Sun, 
-  Moon, 
+import {
+  BookOpen,
+  Layers,
+  Sun,
+  Moon,
   Terminal,
   Type,
   Tag,
@@ -24,7 +24,7 @@ import {
   HelpCircle,
   RotateCw
 } from "lucide-react";
-import { Sidebar } from "via-ui";
+import { Sidebar } from "@vectorial-ia/via-ui";
 import Intro from "./pages/Intro";
 import ButtonDoc from "./pages/ButtonDoc";
 import SelectDoc from "./pages/SelectDoc";
@@ -47,13 +47,13 @@ import TabsDoc from "./pages/TabsDoc";
 import TooltipDoc from "./pages/TooltipDoc";
 import SpinnerDoc from "./pages/SpinnerDoc";
 
-type SectionType = 
-  | "intro" 
-  | "button" 
-  | "select" 
-  | "input" 
-  | "badge" 
-  | "page-header" 
+type SectionType =
+  | "intro"
+  | "button"
+  | "select"
+  | "input"
+  | "badge"
+  | "page-header"
   | "sidebar"
   | "switch"
   | "card"
@@ -94,7 +94,7 @@ export default function App() {
 
     const root = document.documentElement;
     root.style.setProperty("--via-primary", primaryColor);
-    
+
     const rgb = hexToRgb(primaryColor);
     const darkR = Math.max(0, Math.floor(rgb.r * 0.85));
     const darkG = Math.max(0, Math.floor(rgb.g * 0.85));
@@ -105,12 +105,12 @@ export default function App() {
   }, [primaryColor]);
 
   const validSections: SectionType[] = [
-    "intro", 
-    "button", 
-    "select", 
-    "input", 
-    "badge", 
-    "page-header", 
+    "intro",
+    "button",
+    "select",
+    "input",
+    "badge",
+    "page-header",
     "sidebar",
     "switch",
     "card",
@@ -189,13 +189,13 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
-                VIA-UI
+                @vectorial-ia/via-ui
               </span>
-              <span 
-                style={{ 
-                  background: 'var(--via-primary-light, rgba(16, 185, 129, 0.06))', 
-                  color: 'var(--via-primary-dark, #059669)', 
-                  borderColor: 'var(--via-primary-border, rgba(16, 185, 129, 0.15))' 
+              <span
+                style={{
+                  background: 'var(--via-primary-light, rgba(16, 185, 129, 0.06))',
+                  color: 'var(--via-primary-dark, #059669)',
+                  borderColor: 'var(--via-primary-border, rgba(16, 185, 129, 0.15))'
                 }}
                 className="rounded px-1.5 py-0.5 text-[10px] font-bold uppercase border"
               >
@@ -203,7 +203,7 @@ export default function App() {
               </span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             {/* Color Selector */}
             <div className="flex items-center gap-2 border border-gray-200 dark:border-gray-800 rounded-lg px-2.5 py-1.5 bg-gray-50/50 dark:bg-gray-900/30">
@@ -224,7 +224,7 @@ export default function App() {
                     title={color.name}
                   />
                 ))}
-                
+
                 {/* Custom Color Input Picker */}
                 <div className="relative w-4 h-4 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer bg-white">
                   <input

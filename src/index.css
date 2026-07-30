@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "via-ui/styles.css";
+@import "@vectorial-ia/via-ui/styles.css";
 
 @theme {
   --font-sans: "Google Sans", sans-serif;

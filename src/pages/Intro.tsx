@@ -6,7 +6,7 @@ import DocHeader from "../components/DocHeader";
 export function Intro() {
   return (
     <div className="space-y-8 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         title="Documentación del Sistema"
         description="Librería de componentes UI premium con diseño minimalista, tipografía uppercase estructurada y micro-interacciones de alta fidelidad."
       />
@@ -39,8 +39,8 @@ export function Intro() {
           Instala la dependencia de componentes de Vectorial UI en tu proyecto React.
         </p>
         <div className="relative group rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 font-mono text-xs p-4 flex justify-between items-center">
-          <span className="text-primary-600 font-bold">npm install via-ui</span>
-          <CopyButton text="npm install via-ui" />
+          <span className="text-primary-600 font-bold">npm install @vectorial-ia/via-ui</span>
+          <CopyButton text="npm install @vectorial-ia/via-ui" />
         </div>
       </div>
     </div>

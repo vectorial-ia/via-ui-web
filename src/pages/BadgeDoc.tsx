@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Badge, Button, Input } from "via-ui";
+import { Badge, Button, Input } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -62,10 +62,10 @@ export function BadgeDoc() {
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Texto"
-          type="text" 
-          value={bdgText} 
+          type="text"
+          value={bdgText}
           onChange={(e) => setBdgText(e.target.value)}
         />
       </div>
@@ -78,7 +78,7 @@ export function BadgeDoc() {
     </Badge>
   );
 
-  const codeString = `import { Badge } from "via-ui";
+  const codeString = `import { Badge } from "@vectorial-ia/via-ui";
 
 function Example() {
   return (
@@ -90,13 +90,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Badge (Etiqueta)"
         description="Etiqueta pequeña compacta con bordes redondeados tipo píldora para estados, categorías o números identificadores."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

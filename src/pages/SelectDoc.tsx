@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Select, Button, Input, Switch } from "via-ui";
+import { Select, Button, Input, Switch } from "@vectorial-ia/via-ui";
 import { Globe } from "lucide-react";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -63,10 +63,10 @@ export function SelectDoc() {
   const controls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Placeholder"
-          type="text" 
-          value={selectPlaceholder} 
+          type="text"
+          value={selectPlaceholder}
           onChange={(e) => setSelectPlaceholder(e.target.value)}
         />
       </div>
@@ -106,7 +106,7 @@ export function SelectDoc() {
 
   const preview = (
     <div className="w-full max-w-[240px]">
-      <Select 
+      <Select
         options={selectOptions}
         value={selectValue}
         onChange={(val) => setSelectValue(val)}
@@ -117,7 +117,7 @@ export function SelectDoc() {
     </div>
   );
 
-  const codeString = `import { Select } from "via-ui";
+  const codeString = `import { Select } from "@vectorial-ia/via-ui";
 import { Globe } from "lucide-react";
 import { useState } from "react";
 
@@ -144,13 +144,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Select (Selector)"
         description="Desplegable elegante para elegir una opción única entre múltiples elementos disponibles."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

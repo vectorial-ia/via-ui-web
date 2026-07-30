@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Switch } from "via-ui";
+import { Button, Input, Switch } from "@vectorial-ia/via-ui";
 import CopyButton from "../components/CopyButton";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
@@ -82,10 +82,10 @@ export function ButtonDoc() {
       </div>
 
       <div>
-        <Input 
+        <Input
           label="Texto de Etiqueta"
-          type="text" 
-          value={btnText} 
+          type="text"
+          value={btnText}
           onChange={(e) => setBtnText(e.target.value)}
         />
       </div>
@@ -116,7 +116,7 @@ export function ButtonDoc() {
     </Button>
   );
 
-  const codeString = `import { Button } from "via-ui";
+  const codeString = `import { Button } from "@vectorial-ia/via-ui";
 
 function Example() {
   return (
@@ -131,13 +131,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Button (Botón)"
         description="Elemento interactivo estándar para ejecuciones de lógica, envíos de formulario y activaciones contextuales."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}

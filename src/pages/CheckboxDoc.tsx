@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox, Radio, Button, Input, Switch } from "via-ui";
+import { Checkbox, Radio, Button, Input, Switch } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -80,9 +80,9 @@ export function CheckboxDoc() {
   const checkboxControls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Label Checkbox"
-          value={chkLabel} 
+          value={chkLabel}
           onChange={(e) => setChkLabel(e.target.value)}
         />
       </div>
@@ -128,9 +128,9 @@ export function CheckboxDoc() {
   const radioControls = (
     <>
       <div>
-        <Input 
+        <Input
           label="Label Radio"
-          value={radLabel} 
+          value={radLabel}
           onChange={(e) => setRadLabel(e.target.value)}
         />
       </div>
@@ -182,7 +182,7 @@ export function CheckboxDoc() {
 
   return (
     <div className="space-y-12 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Checks & Radios (Selectores de Opción)"
         description="Casillas de verificación y botones de opción estilizados de manera interactiva con colores y tipografía del sistema."
@@ -190,10 +190,10 @@ export function CheckboxDoc() {
 
       <div className="space-y-4">
         <h2 className="text-lg font-bold">Checkbox (Casilla de Selección)</h2>
-        <SandboxLayout 
+        <SandboxLayout
           controls={checkboxControls}
           preview={checkboxPreview}
-          codeString={`import { Checkbox } from "via-ui";
+          codeString={`import { Checkbox } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {
@@ -215,10 +215,10 @@ function Example() {
 
       <div className="space-y-4 pt-6">
         <h2 className="text-lg font-bold">Radio (Botón de Selección Única)</h2>
-        <SandboxLayout 
+        <SandboxLayout
           controls={radioControls}
           preview={radioPreview}
-          codeString={`import { Radio } from "via-ui";
+          codeString={`import { Radio } from "@vectorial-ia/via-ui";
 import { useState } from "react";
 
 function Example() {

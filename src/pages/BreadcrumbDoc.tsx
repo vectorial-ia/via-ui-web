@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Breadcrumb, Button } from "via-ui";
+import { Breadcrumb, Button } from "@vectorial-ia/via-ui";
 import DocHeader from "../components/DocHeader";
 import PropsTable, { PropItem } from "../components/PropsTable";
 import SandboxLayout from "../components/SandboxLayout";
@@ -81,7 +81,7 @@ export function BreadcrumbDoc() {
     </div>
   );
 
-  const codeString = `import { Breadcrumb } from "via-ui";
+  const codeString = `import { Breadcrumb } from "@vectorial-ia/via-ui";
 
 const items = [
   { label: "Inicio", href: "/inicio" },
@@ -102,13 +102,13 @@ function Example() {
 
   return (
     <div className="space-y-10 animate-fadeIn">
-      <DocHeader 
+      <DocHeader
         category="Componente"
         title="Breadcrumb (Migas de Pan)"
         description="Trail estructurado de enlaces interactivos con tipografía uppercase para rastrear y navegar jerarquías del sistema."
       />
 
-      <SandboxLayout 
+      <SandboxLayout
         controls={controls}
         preview={preview}
         codeString={codeString}
