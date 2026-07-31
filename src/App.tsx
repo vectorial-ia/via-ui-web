@@ -22,9 +22,14 @@ import {
   User,
   Folder,
   HelpCircle,
-  RotateCw
+  RotateCw,
+  Table as TableIcon,
+  Keyboard as KeyboardIcon,
+  Search,
+  Command,
+  CornerDownLeft
 } from "lucide-react";
-import { Sidebar } from "@vectorial-ia/via-ui";
+import { Sidebar, Kbd } from "@vectorial-ia/via-ui";
 import Intro from "./pages/Intro";
 import ButtonDoc from "./pages/ButtonDoc";
 import SelectDoc from "./pages/SelectDoc";
@@ -46,6 +51,8 @@ import AvatarDoc from "./pages/AvatarDoc";
 import TabsDoc from "./pages/TabsDoc";
 import TooltipDoc from "./pages/TooltipDoc";
 import SpinnerDoc from "./pages/SpinnerDoc";
+import TableDoc from "./pages/TableDoc";
+import KbdDoc from "./pages/KbdDoc";
 
 type SectionType =
   | "intro"
@@ -68,7 +75,9 @@ type SectionType =
   | "avatar"
   | "tabs"
   | "tooltip"
-  | "spinner";
+  | "spinner"
+  | "table"
+  | "kbd";
 
 interface NavItem {
   id: SectionType;
@@ -78,7 +87,12 @@ interface NavItem {
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [primaryColor, setPrimaryColor] = useState("#3b82f6");
+  const [primaryColor, setPrimaryColor] = useState("#10b981");
+
+  // Command Palette States
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     const hexToRgb = (hex: string) => {
@@ -125,7 +139,9 @@ export default function App() {
     "avatar",
     "tabs",
     "tooltip",
-    "spinner"
+    "spinner",
+    "table",
+    "kbd"
   ];
 
   // Synchronize state with URL hash (e.g. #/button)
@@ -154,32 +170,130 @@ export default function App() {
     window.location.hash = "#/" + sectionId;
   };
 
+  // 1. Comenzando
   const startGroup: NavItem[] = [
     { id: "intro", label: "Introducción", icon: <BookOpen size={14} /> }
   ];
 
-  const componentsGroup: NavItem[] = [
+  // 2. Formularios & Botones
+  const formsGroup: NavItem[] = [
     { id: "button", label: "Button (Botón)", icon: <Terminal size={14} /> },
-    { id: "select", label: "Select (Selector)", icon: <Layers size={14} /> },
     { id: "input", label: "Input (Campo)", icon: <Type size={14} /> },
-    { id: "badge", label: "Badge (Etiqueta)", icon: <Tag size={14} /> },
-    { id: "page-header", label: "PageHeader (Cabecera)", icon: <Heading size={14} /> },
-    { id: "sidebar", label: "Sidebar (Navegación)", icon: <Columns2 size={14} /> },
-    { id: "switch", label: "Switch (Interruptor)", icon: <ToggleLeft size={14} /> },
-    { id: "card", label: "Card (Tarjeta)", icon: <CreditCard size={14} /> },
+    { id: "select", label: "Select (Selector)", icon: <Layers size={14} /> },
     { id: "checkbox", label: "Checks & Radios", icon: <CheckSquare size={14} /> },
     { id: "floating-input", label: "Floating Labels", icon: <FileInput size={14} /> },
-    { id: "accordion", label: "Accordion", icon: <ChevronsUpDown size={14} /> },
-    { id: "alert", label: "Alerts (Alertas)", icon: <AlertCircle size={14} /> },
+    { id: "switch", label: "Switch (Interruptor)", icon: <ToggleLeft size={14} /> },
+  ];
+
+  // 3. Navegación
+  const navigationGroup: NavItem[] = [
+    { id: "sidebar", label: "Sidebar (Navegación)", icon: <Columns2 size={14} /> },
     { id: "breadcrumb", label: "Breadcrumb", icon: <Compass size={14} /> },
-    { id: "modal", label: "Modal (Pop-up)", icon: <Maximize2 size={14} /> },
-    { id: "dropdown", label: "Dropdown Menu", icon: <Menu size={14} /> },
-    { id: "offcanvas", label: "Offcanvas Drawer", icon: <PanelRightClose size={14} /> },
-    { id: "avatar", label: "Avatar (Perfil)", icon: <User size={14} /> },
+    { id: "page-header", label: "PageHeader (Cabecera)", icon: <Heading size={14} /> },
     { id: "tabs", label: "Tabs (Pestañas)", icon: <Folder size={14} /> },
+  ];
+
+  // 4. Estructura & Contenedores
+  const layoutGroup: NavItem[] = [
+    { id: "card", label: "Card (Tarjeta)", icon: <CreditCard size={14} /> },
+    { id: "accordion", label: "Accordion", icon: <ChevronsUpDown size={14} /> },
+    { id: "modal", label: "Modal (Pop-up)", icon: <Maximize2 size={14} /> },
+    { id: "offcanvas", label: "Offcanvas Drawer", icon: <PanelRightClose size={14} /> },
+    { id: "dropdown", label: "Dropdown Menu", icon: <Menu size={14} /> },
+  ];
+
+  // 5. Datos & Visualización
+  const dataGroup: NavItem[] = [
+    { id: "table", label: "Table (Tabla)", icon: <TableIcon size={14} /> },
+    { id: "badge", label: "Badge (Etiqueta)", icon: <Tag size={14} /> },
+    { id: "avatar", label: "Avatar (Perfil)", icon: <User size={14} /> },
+  ];
+
+  // 6. Utilidades & Feedback
+  const feedbackGroup: NavItem[] = [
+    { id: "alert", label: "Alerts (Alertas)", icon: <AlertCircle size={14} /> },
     { id: "tooltip", label: "Tooltip (Ayuda)", icon: <HelpCircle size={14} /> },
     { id: "spinner", label: "Spinner (Carga)", icon: <RotateCw size={14} /> },
+    { id: "kbd", label: "Kbd (Teclado)", icon: <KeyboardIcon size={14} /> },
   ];
+
+  // Flat list of searchable components
+  const searchableItems = [
+    { id: "intro", label: "Introducción", category: "Comenzando" },
+    { id: "button", label: "Button (Botón)", category: "Formularios & Botones" },
+    { id: "input", label: "Input (Campo de Texto)", category: "Formularios & Botones" },
+    { id: "select", label: "Select (Selector)", category: "Formularios & Botones" },
+    { id: "checkbox", label: "Checkbox & Radios", category: "Formularios & Botones" },
+    { id: "floating-input", label: "Floating Labels (Etiquetas Flotantes)", category: "Formularios & Botones" },
+    { id: "switch", label: "Switch (Interruptor)", category: "Formularios & Botones" },
+    { id: "sidebar", label: "Sidebar (Menú Lateral)", category: "Navegación" },
+    { id: "breadcrumb", label: "Breadcrumb (Miga de Pan)", category: "Navegación" },
+    { id: "page-header", label: "PageHeader (Cabecera)", category: "Navegación" },
+    { id: "tabs", label: "Tabs (Pestañas)", category: "Navegación" },
+    { id: "card", label: "Card (Tarjeta)", category: "Estructura & Contenedores" },
+    { id: "accordion", label: "Accordion (Acordeón)", category: "Estructura & Contenedores" },
+    { id: "modal", label: "Modal (Pop-up)", category: "Estructura & Contenedores" },
+    { id: "offcanvas", label: "Offcanvas (Panel Deslizable)", category: "Estructura & Contenedores" },
+    { id: "dropdown", label: "Dropdown Menu (Desplegable)", category: "Estructura & Contenedores" },
+    { id: "table", label: "Table (Tabla de Datos)", category: "Datos & Visualización" },
+    { id: "badge", label: "Badge (Etiqueta)", category: "Datos & Visualización" },
+    { id: "avatar", label: "Avatar (Perfil)", category: "Datos & Visualización" },
+    { id: "alert", label: "Alerts (Alertas)", category: "Utilidades & Feedback" },
+    { id: "tooltip", label: "Tooltip (Información de Ayuda)", category: "Utilidades & Feedback" },
+    { id: "spinner", label: "Spinner (Carga)", category: "Utilidades & Feedback" },
+    { id: "kbd", label: "Kbd (Indicador de Teclado)", category: "Utilidades & Feedback" },
+  ];
+
+  const filteredItems = searchableItems.filter(item =>
+    item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [searchQuery]);
+
+  // Keyboard layout listeners
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Toggle palette: Ctrl+K or Cmd+K
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandPaletteOpen(prev => !prev);
+        setSearchQuery("");
+      }
+      
+      // Open palette: Slash '/' (if not inside an input/textarea)
+      if (e.key === "/" && document.activeElement?.tagName !== "INPUT" && document.activeElement?.tagName !== "TEXTAREA") {
+        e.preventDefault();
+        setIsCommandPaletteOpen(true);
+        setSearchQuery("");
+      }
+
+      // Inside Palette Controls
+      if (isCommandPaletteOpen) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setIsCommandPaletteOpen(false);
+        } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          setSelectedIndex(prev => (filteredItems.length > 0 ? (prev + 1) % filteredItems.length : 0));
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          setSelectedIndex(prev => (filteredItems.length > 0 ? (prev - 1 + filteredItems.length) % filteredItems.length : 0));
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          if (filteredItems.length > 0 && filteredItems[selectedIndex]) {
+            navigateTo(filteredItems[selectedIndex].id as SectionType);
+            setIsCommandPaletteOpen(false);
+          }
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isCommandPaletteOpen, filteredItems, selectedIndex]);
 
   return (
     <div className={`${darkMode ? "dark" : ""} min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased font-sans`}>
@@ -205,6 +319,25 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Search KBD Trigger Button */}
+            <button
+              onClick={() => {
+                setIsCommandPaletteOpen(true);
+                setSearchQuery("");
+              }}
+              className="flex items-center gap-2 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 rounded-lg px-3 py-1.5 bg-gray-50/50 dark:bg-gray-900/30 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 w-36 sm:w-48 md:w-56 justify-between cursor-pointer transition-all"
+            >
+              <div className="flex items-center gap-1.5">
+                <Search size={13} />
+                <span className="hidden sm:inline">Buscar...</span>
+                <span className="sm:hidden">Buscar</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Kbd size="sm">Ctrl</Kbd>
+                <Kbd size="sm">K</Kbd>
+              </div>
+            </button>
+
             {/* Color Selector */}
             <div className="flex items-center gap-2 border border-gray-200 dark:border-gray-800 rounded-lg px-2.5 py-1.5 bg-gray-50/50 dark:bg-gray-900/30">
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mr-1 hidden md:inline-block">Color:</span>
@@ -239,7 +372,7 @@ export default function App() {
               </div>
             </div>
 
-            <span className="hidden sm:inline-block text-xs font-semibold text-gray-400">
+            <span className="hidden lg:inline-block text-xs font-semibold text-gray-400">
               VECTORIAL IA
             </span>
             <button
@@ -254,7 +387,7 @@ export default function App() {
       </header>
 
       <div className="flex">
-        {/* Navigation Sidebar */}
+        {/* Navigation Sidebar with Categorized Groups */}
         <aside className="w-64 border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 shrink-0">
           <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto px-4 py-6">
             <nav className="space-y-6">
@@ -272,10 +405,58 @@ export default function App() {
 
               <div>
                 <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Componentes
+                  Formularios & Botones
                 </h5>
                 <Sidebar
-                  items={componentsGroup}
+                  items={formsGroup}
+                  value={activeSection}
+                  onChange={(id) => navigateTo(id as SectionType)}
+                  size="sm"
+                />
+              </div>
+
+              <div>
+                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                  Navegación
+                </h5>
+                <Sidebar
+                  items={navigationGroup}
+                  value={activeSection}
+                  onChange={(id) => navigateTo(id as SectionType)}
+                  size="sm"
+                />
+              </div>
+
+              <div>
+                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                  Estructura & Contenedores
+                </h5>
+                <Sidebar
+                  items={layoutGroup}
+                  value={activeSection}
+                  onChange={(id) => navigateTo(id as SectionType)}
+                  size="sm"
+                />
+              </div>
+
+              <div>
+                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                  Datos & Visualización
+                </h5>
+                <Sidebar
+                  items={dataGroup}
+                  value={activeSection}
+                  onChange={(id) => navigateTo(id as SectionType)}
+                  size="sm"
+                />
+              </div>
+
+              <div>
+                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                  Utilidades & Feedback
+                </h5>
+                <Sidebar
+                  items={feedbackGroup}
                   value={activeSection}
                   onChange={(id) => navigateTo(id as SectionType)}
                   size="sm"
@@ -308,6 +489,8 @@ export default function App() {
           {activeSection === "tabs" && <TabsDoc />}
           {activeSection === "tooltip" && <TooltipDoc />}
           {activeSection === "spinner" && <SpinnerDoc />}
+          {activeSection === "table" && <TableDoc />}
+          {activeSection === "kbd" && <KbdDoc />}
         </main>
       </div>
 
@@ -323,6 +506,92 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* KBD Command Palette Search Modal */}
+      {isCommandPaletteOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-start justify-center pt-[15vh] px-4"
+          onClick={() => setIsCommandPaletteOpen(false)}
+        >
+          <div 
+            className="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Search Input Bar */}
+            <div className="flex items-center gap-3 px-4 border-b border-gray-200 dark:border-gray-800 h-14 shrink-0">
+              <Command size={18} className="text-gray-400 dark:text-gray-500" />
+              <input
+                type="text"
+                autoFocus
+                placeholder="Escribe para buscar un componente..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 h-full bg-transparent border-none outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
+              />
+              <Kbd size="sm">Esc</Kbd>
+            </div>
+
+            {/* List Results */}
+            <div className="max-h-[320px] overflow-y-auto py-2">
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item, idx) => {
+                  const isSelected = idx === selectedIndex;
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => {
+                        navigateTo(item.id);
+                        setIsCommandPaletteOpen(false);
+                      }}
+                      onMouseEnter={() => setSelectedIndex(idx)}
+                      className={`flex items-center justify-between px-4 py-3 cursor-pointer transition-colors ${
+                        isSelected 
+                          ? "bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-white" 
+                          : "text-gray-600 dark:text-gray-300"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold">{item.label}</span>
+                        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-gray-200/50 dark:bg-gray-800 text-gray-400 dark:text-gray-500">
+                          {item.category}
+                        </span>
+                      </div>
+                      
+                      {isSelected && (
+                        <div className="flex items-center gap-1 text-[10px] text-gray-400">
+                          <span>Ir a</span>
+                          <CornerDownLeft size={10} />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="px-4 py-8 text-center text-sm text-gray-400 dark:text-gray-500">
+                  No se encontraron resultados para <strong className="text-gray-600 dark:text-gray-300">"{searchQuery}"</strong>
+                </div>
+              )}
+            </div>
+
+            {/* Footer guide */}
+            <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 px-4 py-3 bg-gray-50/50 dark:bg-gray-900/30 text-[10px] text-gray-400 dark:text-gray-500 font-medium shrink-0 select-none">
+              <div className="flex items-center gap-1.5">
+                <span>Navegar</span>
+                <Kbd size="sm">↑</Kbd>
+                <Kbd size="sm">↓</Kbd>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span>Seleccionar</span>
+                <Kbd size="sm">Enter ↵</Kbd>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span>Abrir</span>
+                <Kbd size="sm">/</Kbd>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
