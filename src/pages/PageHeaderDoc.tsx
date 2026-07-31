@@ -258,9 +258,6 @@ function Example() {
 
       {/* Screen Match Section (Tractor Header) */}
       <div className="bg-gray-50/50 dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
-        <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">
-          Recreación de Imagen 3 (Detalle de Activo / Tractor Paico)
-        </h4>
         <div className="bg-gray-100 dark:bg-gray-950 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
           <PageHeader
             title="TRACTOR PAICO 1"
