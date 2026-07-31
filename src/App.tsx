@@ -326,7 +326,7 @@ export default function App() {
                 }}
                 className="rounded px-1.5 py-0.5 text-[10px] font-bold uppercase border"
               >
-                v0.1.0
+                v0.1.1
               </span>
             </div>
           </div>
