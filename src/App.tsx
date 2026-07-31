@@ -53,8 +53,10 @@ import TooltipDoc from "./pages/TooltipDoc";
 import SpinnerDoc from "./pages/SpinnerDoc";
 import TableDoc from "./pages/TableDoc";
 import KbdDoc from "./pages/KbdDoc";
+import IntroDoc from "./pages/IntroDoc";
 
 type SectionType =
+  | "landing"
   | "intro"
   | "button"
   | "select"
@@ -119,6 +121,7 @@ export default function App() {
   }, [primaryColor]);
 
   const validSections: SectionType[] = [
+    "landing",
     "intro",
     "button",
     "select",
@@ -147,19 +150,24 @@ export default function App() {
   // Synchronize state with URL hash (e.g. #/button)
   const [activeSection, setActiveSection] = useState<SectionType>(() => {
     const hash = window.location.hash.replace("#/", "");
+    if (hash === "" || hash === "landing") {
+      return "landing";
+    }
     if (validSections.includes(hash as SectionType)) {
       return hash as SectionType;
     }
-    return "intro";
+    return "landing";
   });
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#/", "");
-      if (validSections.includes(hash as SectionType)) {
+      if (hash === "" || hash === "landing") {
+        setActiveSection("landing");
+      } else if (validSections.includes(hash as SectionType)) {
         setActiveSection(hash as SectionType);
       } else {
-        setActiveSection("intro");
+        setActiveSection("landing");
       }
     };
     window.addEventListener("hashchange", handleHashChange);
@@ -219,6 +227,7 @@ export default function App() {
 
   // Flat list of searchable components
   const searchableItems: { id: SectionType; label: string; category: string }[] = [
+    { id: "landing", label: "Inicio / Landing Page", category: "Comenzando" },
     { id: "intro", label: "Introducción", category: "Comenzando" },
     { id: "button", label: "Button (Botón)", category: "Formularios & Botones" },
     { id: "input", label: "Input (Campo de Texto)", category: "Formularios & Botones" },
@@ -301,7 +310,11 @@ export default function App() {
       <header className="sticky top-0 z-40 w-full border-b border-gray-200/80 bg-white/80 backdrop-blur-md dark:border-gray-800/80 dark:bg-gray-950/80">
         <div className="flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
+            <div 
+              className="flex items-center gap-2 cursor-pointer select-none"
+              onClick={() => window.location.hash = "#/"}
+              title="Ir al Inicio"
+            >
               <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
                 @vectorial-ia/via-ui
               </span>
@@ -387,88 +400,91 @@ export default function App() {
       </header>
 
       <div className="flex">
-        {/* Navigation Sidebar with Categorized Groups */}
-        <aside className="w-64 border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 shrink-0">
-          <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto px-4 py-6">
-            <nav className="space-y-6">
-              <div>
-                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Comenzando
-                </h5>
-                <Sidebar
-                  items={startGroup}
-                  value={activeSection}
-                  onChange={(id) => navigateTo(id as SectionType)}
-                  size="sm"
-                />
-              </div>
+        {/* Navigation Sidebar with Categorized Groups - Hidden on Landing Page */}
+        {activeSection !== "landing" && (
+          <aside className="w-64 border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 shrink-0">
+            <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto px-4 py-6">
+              <nav className="space-y-6">
+                <div>
+                  <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                    Comenzando
+                  </h5>
+                  <Sidebar
+                    items={startGroup}
+                    value={activeSection}
+                    onChange={(id) => navigateTo(id as SectionType)}
+                    size="sm"
+                  />
+                </div>
 
-              <div>
-                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Formularios & Botones
-                </h5>
-                <Sidebar
-                  items={formsGroup}
-                  value={activeSection}
-                  onChange={(id) => navigateTo(id as SectionType)}
-                  size="sm"
-                />
-              </div>
+                <div>
+                  <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                    Formularios & Botones
+                  </h5>
+                  <Sidebar
+                    items={formsGroup}
+                    value={activeSection}
+                    onChange={(id) => navigateTo(id as SectionType)}
+                    size="sm"
+                  />
+                </div>
 
-              <div>
-                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Navegación
-                </h5>
-                <Sidebar
-                  items={navigationGroup}
-                  value={activeSection}
-                  onChange={(id) => navigateTo(id as SectionType)}
-                  size="sm"
-                />
-              </div>
+                <div>
+                  <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                    Navegación
+                  </h5>
+                  <Sidebar
+                    items={navigationGroup}
+                    value={activeSection}
+                    onChange={(id) => navigateTo(id as SectionType)}
+                    size="sm"
+                  />
+                </div>
 
-              <div>
-                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Estructura & Contenedores
-                </h5>
-                <Sidebar
-                  items={layoutGroup}
-                  value={activeSection}
-                  onChange={(id) => navigateTo(id as SectionType)}
-                  size="sm"
-                />
-              </div>
+                <div>
+                  <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                    Estructura & Contenedores
+                  </h5>
+                  <Sidebar
+                    items={layoutGroup}
+                    value={activeSection}
+                    onChange={(id) => navigateTo(id as SectionType)}
+                    size="sm"
+                  />
+                </div>
 
-              <div>
-                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Datos & Visualización
-                </h5>
-                <Sidebar
-                  items={dataGroup}
-                  value={activeSection}
-                  onChange={(id) => navigateTo(id as SectionType)}
-                  size="sm"
-                />
-              </div>
+                <div>
+                  <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                    Datos & Visualización
+                  </h5>
+                  <Sidebar
+                    items={dataGroup}
+                    value={activeSection}
+                    onChange={(id) => navigateTo(id as SectionType)}
+                    size="sm"
+                  />
+                </div>
 
-              <div>
-                <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                  Utilidades & Feedback
-                </h5>
-                <Sidebar
-                  items={feedbackGroup}
-                  value={activeSection}
-                  onChange={(id) => navigateTo(id as SectionType)}
-                  size="sm"
-                />
-              </div>
-            </nav>
-          </div>
-        </aside>
+                <div>
+                  <h5 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                    Utilidades & Feedback
+                  </h5>
+                  <Sidebar
+                    items={feedbackGroup}
+                    value={activeSection}
+                    onChange={(id) => navigateTo(id as SectionType)}
+                    size="sm"
+                  />
+                </div>
+              </nav>
+            </div>
+          </aside>
+        )}
 
         {/* Main Content Area */}
-        <main className="flex-1 px-6 py-10 md:px-12 max-w-6xl mx-auto min-h-[calc(100vh-4rem)]">
-          {activeSection === "intro" && <Intro />}
+        <main className={`flex-1 px-6 py-10 md:px-12 ${activeSection === "landing" ? "max-w-7xl" : "max-w-6xl"} mx-auto min-h-[calc(100vh-4rem)] w-full`}>
+          {activeSection === "landing" && <Intro />}
+          {activeSection === "intro" && <IntroDoc />}
           {activeSection === "button" && <ButtonDoc />}
           {activeSection === "select" && <SelectDoc />}
           {activeSection === "input" && <InputDoc />}
