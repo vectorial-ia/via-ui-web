@@ -218,7 +218,7 @@ export default function App() {
   ];
 
   // Flat list of searchable components
-  const searchableItems = [
+  const searchableItems: { id: SectionType; label: string; category: string }[] = [
     { id: "intro", label: "Introducción", category: "Comenzando" },
     { id: "button", label: "Button (Botón)", category: "Formularios & Botones" },
     { id: "input", label: "Input (Campo de Texto)", category: "Formularios & Botones" },

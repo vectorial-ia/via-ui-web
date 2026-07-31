@@ -35,7 +35,7 @@ export function PageHeaderDoc() {
     },
     {
       name: "variant",
-      type: '"default' | 'minimal' | 'card"',
+      type: '"default" | "minimal" | "card"',
       defaultVal: '"default"',
       description: "Estilo estético de la cabecera. 'default' es una tarjeta estándar, 'minimal' no tiene fondo ni bordes, y 'card' es redondeado amplio."
     },
@@ -83,9 +83,9 @@ export function PageHeaderDoc() {
     <>
       <Select
         options={[
-          { label: "TODOS LOS USUARIOS", value: "todos" },
-          { label: "ADMINISTRADORES", value: "admin" },
-          { label: "CLIENTES", value: "client" }
+          { id: "todos", name: "TODOS LOS USUARIOS" },
+          { id: "admin", name: "ADMINISTRADORES" },
+          { id: "client", name: "CLIENTES" }
         ]}
         value="todos"
         onChange={() => {}}
@@ -233,7 +233,7 @@ function Example() {
       ${showBackButton ? `onBackClick={() => window.history.back()}` : ""}
       ${showActions ? `actions={
         <>
-          <Select options={[{label: "TODOS LOS USUARIOS", value: "todos"}]} />
+          <Select options={[{id: "todos", name: "TODOS LOS USUARIOS"}]} value="todos" onChange={() => {}} />
           <Button variant="primary">Actualizar</Button>
         </>
       }` : ""}
