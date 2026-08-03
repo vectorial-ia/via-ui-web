@@ -20,6 +20,9 @@ import SandboxLayout from "../components/SandboxLayout";
 export function SidebarDoc() {
   const [activeItem, setActiveItem] = useState("combustible");
   const [sidebarSize, setSidebarSize] = useState<"sm" | "md" | "lg">("md");
+  const [collapsible, setCollapsible] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
+  const [isControlled, setIsControlled] = useState(false);
 
   const sidebarProps: PropItem[] = [
     {
@@ -78,6 +81,45 @@ export function SidebarDoc() {
       name: "mobilePanelStyle",
       type: "React.CSSProperties",
       description: "Estilos personalizados inline para el panel lateral de la sidebar en móvil."
+    },
+    {
+      name: "collapsible",
+      type: "boolean",
+      defaultVal: "false",
+      description: "Si es verdadero, permite colapsar y expandir la barra lateral en escritorio mediante un botón flotante."
+    },
+    {
+      name: "collapsed",
+      type: "boolean",
+      description: "Estado de colapso controlado (solo aplica en escritorio)."
+    },
+    {
+      name: "onCollapseChange",
+      type: "(collapsed: boolean) => void",
+      description: "Función callback disparada al cambiar el estado de colapso en escritorio."
+    },
+    {
+      name: "defaultCollapsed",
+      type: "boolean",
+      defaultVal: "false",
+      description: "Estado de colapso inicial no controlado en escritorio."
+    },
+    {
+      name: "width",
+      type: "string | number",
+      defaultVal: '"260px"',
+      description: "Ancho de la barra lateral en escritorio cuando está expandida."
+    },
+    {
+      name: "collapsedWidth",
+      type: "string | number",
+      defaultVal: '"72px"',
+      description: "Ancho de la barra lateral en escritorio cuando está colapsada."
+    },
+    {
+      name: "collapseToggleButtonStyle",
+      type: "React.CSSProperties",
+      description: "Estilos personalizados para el botón flotante que alterna el colapso en escritorio."
     }
   ];
 
@@ -115,6 +157,45 @@ export function SidebarDoc() {
       </div>
 
       <div>
+        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2">Colapso en Escritorio</label>
+        <div className="flex flex-col gap-2">
+          <label className="flex items-center gap-2 text-xs cursor-pointer select-none text-gray-700 dark:text-gray-300">
+            <input
+              type="checkbox"
+              checked={collapsible}
+              onChange={(e) => setCollapsible(e.target.checked)}
+              className="rounded border-gray-300 dark:border-gray-700 text-primary-600 focus:ring-primary-500"
+            />
+            <span>Habilitar colapsado (collapsible)</span>
+          </label>
+          {collapsible && (
+            <>
+              <label className="flex items-center gap-2 text-xs cursor-pointer select-none text-gray-700 dark:text-gray-300">
+                <input
+                  type="checkbox"
+                  checked={isControlled}
+                  onChange={(e) => setIsControlled(e.target.checked)}
+                  className="rounded border-gray-300 dark:border-gray-700 text-primary-600 focus:ring-primary-500"
+                />
+                <span>Controlar estado externamente</span>
+              </label>
+              {isControlled && (
+                <label className="flex items-center gap-2 text-xs cursor-pointer select-none ml-4 animate-fadeIn text-gray-700 dark:text-gray-300">
+                  <input
+                    type="checkbox"
+                    checked={collapsed}
+                    onChange={(e) => setCollapsed(e.target.checked)}
+                    className="rounded border-gray-300 dark:border-gray-700 text-primary-600 focus:ring-primary-500"
+                  />
+                  <span>Colapsado (collapsed)</span>
+                </label>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      <div>
         <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">Activo</span>
         <code className="text-xs font-mono font-bold text-primary-600 capitalize">
           "{activeItem}"
@@ -131,13 +212,21 @@ export function SidebarDoc() {
   );
 
   const preview = (
-    <div className="w-full max-w-[240px] border border-gray-200 dark:border-gray-800 rounded-xl p-4 bg-white dark:bg-gray-950">
+    <div className="w-full flex justify-start items-stretch border border-gray-200 dark:border-gray-800 rounded-xl p-4 bg-white dark:bg-gray-950 overflow-hidden" style={{ minHeight: "420px" }}>
       <Sidebar
         items={sidebarOptions}
         value={activeItem}
         onChange={(id) => setActiveItem(id)}
         size={sidebarSize}
+        collapsible={collapsible}
+        collapsed={isControlled ? collapsed : undefined}
+        onCollapseChange={isControlled ? setCollapsed : undefined}
+        defaultCollapsed={false}
       />
+      <div className="flex-1 p-6 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/50 border-l border-gray-100 dark:border-gray-900 flex flex-col justify-center items-center gap-2">
+        <span className="font-semibold text-gray-700 dark:text-gray-300">Contenido de la Página</span>
+        <span className="text-xs text-gray-400">Sección seleccionada: {activeItem}</span>
+      </div>
     </div>
   );
 
@@ -154,12 +243,20 @@ const items = [
 function Example() {
   const [active, setActive] = useState("${activeItem}");
   return (
-    <Sidebar
-      items={items}
-      value={active}
-      onChange={(id) => setActive(id)}
-      size="${sidebarSize}"
-    />
+    <div style={{ display: "flex", minHeight: "400px" }}>
+      <Sidebar
+        items={items}
+        value={active}
+        onChange={(id) => setActive(id)}
+        size="${sidebarSize}"
+        collapsible={${collapsible}}
+        ${isControlled ? `collapsed={collapsed}
+        onCollapseChange={setCollapsed}` : `defaultCollapsed={false}`}
+      />
+      <main style={{ flex: 1, padding: "24px" }}>
+        Contenido de la aplicación...
+      </main>
+    </div>
   );
 }`;
 
@@ -168,7 +265,7 @@ function Example() {
       <DocHeader
         category="Componente"
         title="Sidebar (Navegación Lateral)"
-        description="Menú vertical estructurado para navegación interna, con íconos personalizados, animaciones de hover y marcación del elemento activo."
+        description="Menú vertical estructurado para navegación interna, con soporte para modo colapsable en escritorio, animaciones de transición suaves, menú flotante tipo cajón en móviles y marcación del elemento activo."
       />
 
       <SandboxLayout
