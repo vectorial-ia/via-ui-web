@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
+      "@vectorial-ia/via-ui/styles.css": path.resolve(__dirname, "../dist/styles.css"),
+      "@vectorial-ia/via-ui": path.resolve(__dirname, "../src"),
       "via-ui/styles.css": path.resolve(__dirname, "../dist/styles.css"),
       "via-ui": path.resolve(__dirname, "../src"),
     },

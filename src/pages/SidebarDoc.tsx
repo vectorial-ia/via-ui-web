@@ -47,6 +47,37 @@ export function SidebarDoc() {
       name: "style",
       type: "React.CSSProperties",
       description: "Estilos personalizados inline para el contenedor principal de la sidebar."
+    },
+    {
+      name: "isOpen",
+      type: "boolean",
+      description: "Define si la sidebar está expandida (solo en modo móvil, < 768px)."
+    },
+    {
+      name: "onOpenChange",
+      type: "(open: boolean) => void",
+      description: "Función callback disparada al cambiar el estado de expansión de la sidebar."
+    },
+    {
+      name: "defaultOpen",
+      type: "boolean",
+      defaultVal: "false",
+      description: "Estado de expansión inicial de la sidebar en móviles."
+    },
+    {
+      name: "toggleButtonStyle",
+      type: "React.CSSProperties",
+      description: "Estilos personalizados inline para el botón de alternancia móvil."
+    },
+    {
+      name: "backdropStyle",
+      type: "React.CSSProperties",
+      description: "Estilos personalizados inline para el overlay backdrop móvil."
+    },
+    {
+      name: "mobilePanelStyle",
+      type: "React.CSSProperties",
+      description: "Estilos personalizados inline para el panel lateral de la sidebar en móvil."
     }
   ];
 
@@ -88,6 +119,13 @@ export function SidebarDoc() {
         <code className="text-xs font-mono font-bold text-primary-600 capitalize">
           "{activeItem}"
         </code>
+      </div>
+
+      <div className="p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/50 rounded-lg">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-1">💡 Modo Móvil (&lt; 768px)</span>
+        <p className="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">
+          Reduce el ancho de tu pantalla a menos de 768px (o activa el modo móvil en las Herramientas de Desarrollador) para ver el botón flotante de menú, el backdrop blur y el sidebar en modo cajón (drawer).
+        </p>
       </div>
     </>
   );

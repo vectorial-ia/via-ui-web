@@ -21,6 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
+      "@vectorial-ia/via-ui": ["../src/index.ts"],
       "via-ui": ["../src/index.ts"]
     }
   },
